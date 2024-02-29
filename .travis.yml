@@ -11,9 +11,13 @@ env:
 install:
   - pip install -r requirements.txt
 
+before_script:
+  - python manage.py migrate
+  - python manage.py collectstatic --noinput
+
 script:
-  - python manage.py test
   - black --check .
+  - flake8 .
 
 deploy:
   provider: elasticbeanstalk
@@ -23,3 +27,6 @@ deploy:
   app: "django-tutorial"
   env: "django-env"
   bucket_name: "elasticbeanstalk-us-west-2-419323569300"
+  on:
+    repo: "theresatvan/swe1-app"
+    branch: "main"
