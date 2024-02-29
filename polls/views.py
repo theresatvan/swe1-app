@@ -14,7 +14,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return Question.objects.order_by("-pub_date")[:5]
-    
+
 
 class DetailView(generic.DetailView):
     model = Question
@@ -35,10 +35,7 @@ def vote(request, question_id):
         return render(
             request,
             "polls/detail.html",
-            {
-                "question": question,
-                "error_message": "You didn't select a choice."
-            },
+            {"question": question, "error_message": "You didn't select a choice."},
         )
     else:
         selected_choice.votes += 1
