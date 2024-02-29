@@ -13,6 +13,7 @@ install:
 
 script:
   - python manage.py test
+  - black --check .
 
 deploy:
   provider: elasticbeanstalk
